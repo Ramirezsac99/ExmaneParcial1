@@ -167,7 +167,40 @@ public class GestionEmpleados {
 	 * </ul>
 	 */
 	public void mostrarConteoPorTipo() {
-		// TODO: completar
+	    if (cantidad == 0) {
+	        return;
+	    }
+
+	    String[] tiposVistos = new String[cantidad];
+	    int[] conteos = new int[cantidad];
+	    int tiposUnicos = 0;
+
+	    for (int i = 0; i < cantidad; i++) {
+	        String tipoActual = empleados[i].getTipo();
+
+	        // Buscar si ese tipo ya fue registrado antes
+	        int posicion = -1;
+	        for (int j = 0; j < tiposUnicos; j++) {
+	            if (tiposVistos[j].equals(tipoActual)) {
+	                posicion = j;
+	                break;
+	            }
+	        }
+
+	        if (posicion == -1) {
+	            // Tipo nuevo: se agrega en la siguiente posición libre
+	            tiposVistos[tiposUnicos] = tipoActual;
+	            conteos[tiposUnicos] = 1;
+	            tiposUnicos++;
+	        } else {
+	            // Tipo ya visto: se incrementa su conteo
+	            conteos[posicion]++;
+	        }
+	    }
+
+	    for (int i = 0; i < tiposUnicos; i++) {
+	        System.out.println(tiposVistos[i] + ": " + conteos[i]);
+	    }
 	}
 
 	/**
